@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vikash's — Portfolio</title>
+  <meta name="description" content="Personal portfolio — systems, security, backend projects" />
+  <!-- Fonts to match look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0a0e2a;   /* page background like reference */
+      --ink:#e8ebff;  /* main text */
+      --muted:#b3b9d4;/* secondary text */
+      --link:#9a73ff; /* violet accent */
+      --btn-bg:#0e1231;
+      --btn-br:#ffffff26;
+      --hr:#ffffff1a;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; font-family:Poppins, Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background:var(--bg); color:var(--ink);
+      font-size:18px;
+    }
+    a{color:var(--link); text-decoration:none}
+    a:hover{text-decoration:underline}
+
+    /* Header */
+    .nav{position:sticky; top:0; z-index:50; background:#0b1135cc; backdrop-filter:blur(8px); border-bottom:1px solid #ffffff14}
+    .wrap{max-width:1440px; margin:0 auto; padding:0 20px}
+    .nav-inner{display:flex; align-items:center; justify-content:center; height:72px}
+    .brand{font-weight:800; letter-spacing:.3px; margin:0 auto; text-align:center; font-size:30px}
+    .menu{display:flex; gap:36px}
+    .menu a{color:var(--ink); opacity:.9}
+    .menu a:hover{opacity:1}
+
+    /* Hero */
+    .hero{padding:64px 0 56px}
+    .grid{display:grid; grid-template-columns:1.25fr .85fr; gap:48px; align-items:center}
+    .hello{font-size:20px; color:var(--muted); margin:0 0 8px}
+    .h1{font-size:64px; line-height:1.12; margin:0 0 18px}
+    .gradient{background:linear-gradient(90deg,#c69cff,#7f5cff); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .lead{color:var(--ink); font-weight:300; font-size:24px; line-height:1.75; margin:0 0 10px}
+    .lead .accent{color:#c9b7ff}
+    .typed-wrap{font-size:34px; margin:18px 0 0}
+    .typed{display:inline-block; min-width:12ch; border-right:2px solid #c69cff; white-space:nowrap; overflow:hidden}
+
+    /* Buttons */
+    .cta{display:flex; flex-wrap:wrap; gap:22px; margin-top:36px}
+    .btn{display:inline-flex; align-items:center; justify-content:center; text-align:center; min-width:200px; padding:16px 20px; border-radius:16px; color:var(--ink); background:var(--btn-bg); border:1px solid var(--btn-br); box-shadow:0 10px 24px rgba(0,0,0,.3)}
+    .btn:hover{transform:translateY(-1px); text-decoration:none}
+
+    /* Photo */
+    .photo{height:480px; width:100%; border:none; border-radius:12px; object-fit:contain; display:block; background:none; box-shadow:none}
+
+    /* Section headings */
+    section{scroll-margin-top:84px}
+    h2{font-size:24px; font-weight:600; margin:0 0 12px; color:#cfd6ff}
+    hr{border:none; border-top:1px solid var(--hr); margin:32px 0; width:100vw; margin-left:calc(50% - 50vw)}
+
+    /* Projects list */
+    .projects{padding:16px 0 56px}
+    .proj{padding:18px 6px 22px}
+    .proj-title{font-size:20px; font-weight:600; display:flex; align-items:center; gap:12px}
+    .proj-title::before{content:"•"; color:#b9c3ff; font-size:28px; line-height:1}
+    .proj-date{margin-left:auto; color:#9aa6d6; font-size:14px}
+    .proj-header{display:flex; align-items:center; gap:12px; justify-content:space-between}
+    .proj-desc{color:#cbd2ff; line-height:1.7; margin:8px 0 10px}
+    .read{color:#a98bff; font-weight:500}
+    .center{display:flex; justify-content:center}
+    .hidden{display:none}
+
+    /* Footer */
+    footer{border-top:1px solid var(--hr); padding:24px 0 36px; color:#c7ccef}
+    .bottom-nav{display:flex; gap:26px; justify-content:center; margin-bottom:10px}
+    .copyright{opacity:.85; text-align:center}
+
+    /* Modal (for Read more) */
+    .modal{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:60}
+    .modal > .box{background:#0f1642; border:1px solid #ffffff26; border-radius:12px; padding:22px 22px 18px; width:min(520px,90vw)}
+    .modal h3{margin:0 0 8px}
+    .modal p{margin:0 0 14px; color:#c9cfff}
+    .close{display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; background:#0b1138; border:1px solid #ffffff26; color:#dbe0ff}
+
+    /* Responsive */
+    @media (max-width: 980px){ .grid{grid-template-columns:1fr} .photo{height:420px} .h1{font-size:44px} .lead{font-size:20px} .typed-wrap{font-size:26px} }
+    @media (max-width: 640px){ .cta{gap:12px} .btn{min-width:150px; padding:10px 12px} .photo{height:320px} .h1{font-size:34px} .typed-wrap{font-size:22px} }
+  </style>
+</head>
+<body>
+  <!-- Header / Nav -->
+  <div class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">Vikash's Portfolio</div>
+      
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- Hero -->
+    <section id="home" class="hero">
+      <div class="grid">
+        <div>
+          <p class="hello">Hi, my name is <span class="gradient" style="font-weight:600">Vikash</span>.</p>
+          <h1 class="h1">I am currently a second year <span class="gradient" style="font-weight:600">M.Tech</span> in <span class="gradient" style="font-weight:600">Cyber Security</span> student at <span class="gradient" style="font-weight:600">IITD</span>.</h1>
+          <div class="typed-wrap">My area of interests lies in domain of: <span id="typed" class="typed">Network Security</span></div>
+
+          <div class="cta">
+            <a class="btn" href="resume.pdf" target="_blank" rel="noreferrer">Download Resume</a>
+            <a class="btn" href="https://github.com/vikash0909?tab=repositories" target="_blank" rel="noreferrer">GitHub Profile</a>
+            <a class="btn" href="https://www.linkedin.com/in/vikash-pandey-8558922b9/" target="_blank" rel="noreferrer">LinkedIn Profile</a>
+          </div>
+        </div>
+        <div>
+          <!-- Replace profile.jpg with your own headshot (square, white bg to match) -->
+          <img class="photo" src="photo.jpg" alt="Profile photo" />
+        </div>
+      </div>
+    </section>
+
+    <hr />
+    <section id="education">
+      <h2>Education</h2>
+      <p style="color:#cbd2ff; line-height:1.8; margin:10px 0 0"><strong>M.Tech</strong> — Cyber Security, <em>IIT Delhi</em> (2023–2025) CGPA-8.28</p>
+      <p style="color:#cbd2ff; line-height:1.8">
+        <strong>B.Tech</strong> — Computer Science & Engineering, <em>Bhilai Institute Of Technology,Durg</em> (2019–2023) CPI-9.13
+      </p>
+    </section>
+
+    <hr />
+
+    <!-- Projects -->
+    <section id="projects" class="projects">
+      <h2>What have I done so far?</h2>
+      <h2 style="margin-top:10px">Recent Projects</h2>
+
+      <div class="proj">
+        <div class="proj-header">
+          <div class="proj-title"> Custom Instruction Integration in GEM5 with RISC-V</div>
+          <span class="proj-date">(July, 2024 - Aug, 2025)</span>
+        </div>
+        <div class="proj-desc">-Compiled riscv-gnu-toolchain, integrating GCC with new assembly instructions, fact (factorial), mod (modulus) and 
+comb (nCr) for RISC-V architecture. Compiled GEM5 with RISC-V and added support for the custom instructions.<br>- Binomial Theorem Computation using standard arithmetic, custom factorial instruction and custom combination 
+instruction. Conducted performance analysis measuring SimSeconds, SimTicks, and CPI. Implementation with 
+custom Combination instruction performed 20% faster than the standard over 100 runs.</div>
+     <!-- <a href="#" class="read" data-modal>Read more</a> -->
+      </div>
+      <hr />
+
+      <div class="proj">
+        <div class="proj-header">
+          <div class="proj-title"> Kernel Upgrade in xv6 OS: System Calls, Scheduler & Signals</div>
+          <span class="proj-date"> (Prof. Smruti Sarangi) (May, 2025 - June, 2025)</span>
+        </div>
+        <div class="proj-desc">- Extended xv6 kernel with syscalls for restricting syscalls, enforcing file permissions & controlling processes at runtime.<br>-Engineered a signal-handling framework driven by interrupts, enabling kill, suspend, resume, and user-defined handlers.<br>- Implemented dynamic priority-boosted scheduling with α–β tuning, significantly improving fairness, avoiding 
+starvation, enhancing CPU efficiency, and ensuring balance between CPU-bound and I/O-bound workloads.</div>
+        <!-- <a href="#" class="read" data-modal>Read more</a> -->
+      </div>
+      <hr />
+
+      <div class="proj">
+        <div class="proj-header">
+          <div class="proj-title"> Memory Management & Page Swapping in xv6 Operating System</div>
+          <span class="proj-date"> (Prof. Smruti Sarangi) (Apr 2025 – May 2025)</span>
+        </div>
+        <div class="proj-desc">- Impemented a robust memory monitoring printer utility to accurately track per-process page allocations in xv6.<br>- Designed a swap mechanism with page replacement policy and page fault handling for controlled memory reclamation.<br>- Built a page fault handler with α–β tuned replacement strategy, reducing thrashing, balancing memory & performance.</div>
+        <!-- <a href="#" class="read" data-modal>Read more</a> -->
+      </div>
+      <hr />
+         <div class="proj">
+        <div class="proj-header">
+          <div class="proj-title">  Enhanced UDP with Reliability & Congestion Control </div>
+          <span class="proj-date">(Prof. Tarun Mangla) (Aug, 2024 - Sep, 2024)</span>
+        </div>
+        <div class="proj-desc">Added reliability to UDP with ACK tracking, retransmission, and fast recovery, achieving 99% delivery accuracy.<br>- Maintained loss-free, in-order packet delivery across unreliable networks using cumulative acknowledgment schemes.<br>- Improved throughput stability and fairness by adapting the congestion window to changing network conditions.</div>
+        <!-- <a href="#" class="read" data-modal>Read more</a> -->
+      </div>
+      <hr />
+               <div class="proj">
+        <div class="proj-header">
+          <div class="proj-title"> Concurrent TCP Client-Server with Collision Control & Scheduling </div>
+          <span class="proj-date">(Prof. Tarun Mangla) (Aug, 2024 - Sep, 2024)</span>
+        </div>
+        <div class="proj-desc">- Developed a multithreaded server using TCP sockets and pthreads, handle many concurrent clients under heavy load.<br>- Integrated FIFO and Round Robin scheduling, And designed protocols (Slotted Aloha, BEB) for collision handling.</div>
+        <!-- <a href="#" class="read" data-modal>Read more</a> -->
+      </div>
+      <hr />
+
+      <!-- Hidden extra projects -->
+      <div id="moreProjects" class="hidden">
+        <div class="proj">
+          <div class="proj-header">
+            <div class="proj-title"> Man-in-the-Middle Attacks on Diffie-Hellman via ARP Spoofing</div>
+            <span class="proj-date">(Prof. Huzur Sharan) (May, 2025 - June, 2025)</span>
+          </div>
+          <div class="proj-desc">- Implemented a custom MITM script leveraging ARP spoofing to intercept Diffie-Hellman key exchange between client 
+and server.Extracted and modified session keys, demonstrating vulnerabilities in unauthenticated DH.</div>
+          <!-- <a href="#" class="read" data-modal>Read more</a> -->
+        </div>
+        <hr />
+
+      
+        <div class="proj">
+          <div class="proj-header">
+            <div class="proj-title"> Android App Vulnerability Assessment and Exploitation</div>
+            <span class="proj-date">(Dr. Rajesh Pal) (May, 2025 - June, 2025)</span>
+          </div>
+          <div class="proj-desc">- Performed vulnerability testing on Android apps (AndroGoat, DIVA, InsecureShop) using adb, jadx-gui, and 
+Genymotion, identifying and exploiting flaws in data storage, component protection, and root detection.</div>
+          <!-- <a href="#" class="read" data-modal>Read more</a> -->
+        </div>
+        <hr />
+
+                
+        <div class="proj">
+          <div class="proj-header">
+            <div class="proj-title"> Real-World Website Security Analysis</div>
+            <span class="proj-date">(Prof. Huzur Sharan) (May, 2025 - June, 2025)</span>
+          </div>
+          <div class="proj-desc">- Performed Vulnerability Assessment & Penetration Testing (VAPT) on real-world websites and Discovered and 
+validated critical exploits. Tools used: Nmap, Wireshark, WPScan, Nikto, Burp Suite, and Metasploit.</div>
+          <!-- <a href="#" class="read" data-modal>Read more</a> -->
+        </div>
+        <hr />
+
+        <div class="proj">
+          <div class="proj-header">
+            <div class="proj-title"> Parallelized Quadratic Sieve algo with Runtime Optimization</div>
+            <span class="proj-date"> (Prof Ashok bhateja) (Sept 2024 – Oct 2024) </span>
+          </div>
+          <div class="proj-desc">- Implemented theQuadratic Sieve algo. with MPI-based parallel workload distribution and GMP big integer arithmetic.<br>- Built a Vigenère cipher cryptanalysis tool using Kasiski examination, Index of Coincidence, and Mutual Index of 
+Coincidence. Recovered encryption key and decrypted ciphertexts without prior knowledge of the key.</div>
+          <!-- <a href="#" class="read" data-modal>Read more</a> -->
+        </div>
+        <hr />
+      </div>
+
+      <div class="center" style="margin-top:18px">
+        <a class="btn" href="#" id="showToggle" aria-expanded="false">Show More Projects</a>
+      </div>
+    </section>
+
+    <hr />
+
+    <!-- Contact -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+      <p style="color:#cbd2ff; line-height:1.8; margin:10px 0 0">Email: <a href="#">jcs242613@iitd.ac.in</a></p>
+      <p style="color:#cbd2ff; line-height:1.8; margin:10px 0 0">Number: <a href="#">+917987167580</a></p>
+      <p style="color:#cbd2ff; line-height:1.8">Location: New Delhi, India</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="copyright">Copyright © www.vikash0909.github.io | All rights reserved</div>
+    </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="box">
+      <h3>×</h3>
+      <p>This functionality will be made available soon!</p>
+      <div style="display:flex; justify-content:flex-end"><a class="close" href="#" id="close">OK</a></div>
+    </div>
+  </div>
+
+  <script>
+    // Rotating typed text (Network Security → Systems Engineering → Software Development → Operating Systems → DSA)
+    (function(){
+      const el = document.getElementById('typed');
+const words = [
+  'Systems Engineering',
+  'Software Engineering',
+  'Operating Systems',
+  'Computer Organization and Architecture',
+  'Network Security',
+  'Data Structures and Algorithms'
+];
+
+      let w = 0, c = 0, del = false;
+      function step(){
+        const word = words[w];
+        if(!del){
+          c++;
+          if(c === word.length){
+            el.textContent = word;
+            del = true;
+            return setTimeout(step, 900);
+          }
+        } else {
+          c--;
+          if(c === 0){
+            del = false;
+            w = (w + 1) % words.length;
+          }
+        }
+        el.textContent = word.slice(0, Math.max(0,c));
+        setTimeout(step, del ? 60 : 100);
+      }
+      setTimeout(step, 400);
+    })();
+
+    // Modal wiring (for Read more)
+    const modal = document.getElementById('modal');
+    const close = document.getElementById('close');
+    function openModal(e){ e && e.preventDefault(); modal.style.display='flex'; }
+    document.querySelectorAll('[data-modal]').forEach(a => a.addEventListener('click', openModal));
+    close.addEventListener('click', (e)=>{ e.preventDefault(); modal.style.display='none'; })
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) modal.style.display='none'; });
+
+    // Show More / Show Lesser toggle
+    const toggleBtn = document.getElementById('showToggle');
+    const more = document.getElementById('moreProjects');
+    toggleBtn.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const hidden = more.classList.toggle('hidden');
+      toggleBtn.textContent = hidden ? 'Show More Projects' : 'Show Lesser Projects';
+      toggleBtn.setAttribute('aria-expanded', String(!hidden));
+    });
+  </script>
+</body>
+</html>
